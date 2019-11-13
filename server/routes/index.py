@@ -5,12 +5,20 @@ import os
 import sqlite3 as sql
 from flask import jsonify, request
 
+#https://triagebackend.us-south.cf.appdomain.cloud/
+
+'''
+Endpoint to test if server is active and accepting requests
+'''
 @app.route('/')
 def hello_world():
-    return "Server is Up and Running!", 200 
+    return "Server is Running!", 200 
     #return app.send_static_file('index.html')
 
 #Newly Added Routes
+'''
+Returns patient information by category
+'''
 @app.route("/getT1Patients", methods=['POST'])
 def getT1Patients():
     content = request.json
@@ -55,6 +63,9 @@ def getT4Patients():
         
     return getCategoryPatient("T4")
 
+'''
+Returns all patient information
+'''
 @app.route("/getPatient", methods=['POST'])
 def getPatientData():
     content = request.json
@@ -77,6 +88,9 @@ def getPatientData():
         else:
             return jsonify(dict(patient))
 
+'''
+Edit any or all of the patient information
+'''
 @app.route("/editPatient", methods=['POST'])
 def editPatientData():
     content = request.json
@@ -103,7 +117,9 @@ def editPatientData():
         
     return "Patient Edited"
 
-
+'''
+Add patient to database
+'''
 @app.route("/addPatient", methods=['POST'])
 def createPatientData():
     content = request.json
@@ -136,6 +152,9 @@ def createPatientData():
       
     return "Patient Added to Database", 200
 
+'''
+Get all patient locations sorted by tags
+'''
 @app.route("/getLocations", methods=['POST'])
 def getLocations():
     content = request.json
@@ -167,7 +186,9 @@ def getLocations():
 
     return jsonify({"t1": locT1,"t2": locT2,"t3": locT3,"t4": locT4})
 
-
+'''
+Returns username of a user with a specific token
+'''
 @app.route("/respondInfo", methods=['POST'])
 def respondInfo():
     content = request.json
@@ -188,6 +209,9 @@ def respondInfo():
             username = user[0]
             return jsonify({"username":username})
 
+'''
+Handles login for responder
+'''
 @app.route("/login", methods=['POST'])
 def loginUser():
     content = request.json
@@ -208,6 +232,10 @@ def loginUser():
             token = user1[0]
             return jsonify({"token":token})
 
+'''
+Helper Method
+Checks to see if responder token is valid
+'''
 def validToken(token):
     with sql.connect("database.db") as con:
         cur = con.cursor()
@@ -216,6 +244,10 @@ def validToken(token):
         else:
             return False
 
+'''
+Helper Method
+Returns patient information based on tag category
+'''
 def getCategoryPatient(category):
     with sql.connect("database.db") as con:
         cur = con.cursor()
