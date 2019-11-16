@@ -6,7 +6,7 @@
 
 Triige is able to quickly assess the severity of each victim’s condition and assign each person a priority for immediate treatment. It does this by attaching QR codes preprogrammed with SHA-256 encryption hashes to patients at the scene. First responders scan the QR code and input a patient’s data either manually or by using voice commands. Entered inputs are stored on a Flask server in the IBM Cloud. This information can be retrieved from the IBM Cloud by GET & POST requests. Our user interface (UI) is simple and easy to use while allowing for first responders to see a variety of aggregate data such as the amount of blood needed. We comply with the HIPPA standards since all data is stored on the IBM Cloud along with leveraging all the security features provided by the cloud. Additionally, no patient health information is stored on QR codes to protect the patient’s privacy.
 
-<img align="center" src="screenshots/screenshpt_1.png" height="420em" />
+<img align="center" src="https://github.com/dhruvilp/triige/tree/master/screenshots/screenshpt_1.png" height="420em" />
 <img align="center" src="screenshots/screenshot_2.png" height="420em" />
 <img align="center" src="screenshots/customer_segment_1.png" height="420em" />
 <img align="center" src="screenshots/customer_segment_2.png" height="420em" />
